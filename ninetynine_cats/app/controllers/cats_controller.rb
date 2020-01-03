@@ -21,12 +21,28 @@ class CatsController < ApplicationController
 
     def create
         @cat = Cat.new(cat_params)
-        
         if @cat.save
             redirect_to cat_url(@cat)
         else
             render :new
         end
+    end
+
+    def edit
+        @cat = Cat.find(params[:id])
+        render :edit
+    end
+
+    def update
+        debugger
+          @cat = Cat.find(params[:id])
+
+          if @cat.update_attributes(cat_params)
+            redirect_to cat_url(@cat)
+          else
+            render :edit
+          end
+
     end
 
     private
